@@ -1,6 +1,6 @@
 # MapReduce
 
-**TODO: Add description**
+Programming model designed to process large volumes of data in parallel, dividing the work into a set of independent tasks.
 
 ## Installation
 
