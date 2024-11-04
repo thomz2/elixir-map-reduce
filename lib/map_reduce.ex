@@ -1,11 +1,16 @@
 defmodule MapReduce do
 
-  def execute(data) do
+  defp maybe_inspect(data, true, label), do: IO.inspect(data, label: label)
+  defp maybe_inspect(data, false, _label), do: data
+
+  def execute(data, debug \\ false) do
     data
     |> Enum.flat_map( fn line -> Mapper.map_line(line, " ") end )
-    # |> IO.inspect(label: "mapped data")
+    |> maybe_inspect(debug, "op1 data")
     |> Shuffler.shuffle()
+    |> maybe_inspect(debug, "op2 data")
     |> Reducer.reduce_grouped_data()
+    |> maybe_inspect(debug, "op3 data")
   end
 
   def run_example do
