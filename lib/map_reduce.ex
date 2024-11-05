@@ -13,6 +13,12 @@ defmodule MapReduce do
     |> maybe_inspect(debug, "op3 data")
   end
 
+  def execute_w_time(data, debug \\ false) do
+    {time, result} = :timer.tc(fn -> execute(data, debug) end)
+    IO.puts("MapReduce: #{time} ms")
+    result
+  end
+
   def run_example do
     data = [
       "Elixir is awesome",
